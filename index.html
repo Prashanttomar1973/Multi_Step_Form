@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="step-list">
+                <div class="step-item active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-info">
+                        <div class="step-label">STEP 1</div>
+                        <div class="step-title">YOUR INFO</div>
+                    </div>
+                </div>
+                <div class="step-item" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-info">
+                        <div class="step-label">STEP 2</div>
+                        <div class="step-title">SELECT PLAN</div>
+                    </div>
+                </div>
+                <div class="step-item" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-info">
+                        <div class="step-label">STEP 3</div>
+                        <div class="step-title">ADD-ONS</div>
+                    </div>
+                </div>
+                <div class="step-item" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-info">
+                        <div class="step-label">STEP 4</div>
+                        <div class="step-title">SUMMARY</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="step-content active" id="step1">
+                <div class="form-header">
+                    <h1 class="form-title">Personal info</h1>
+                    <p class="form-subtitle">Please provide your name, email address, and phone number.</p>
+                </div>
+                
+                <form id="personalInfoForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="e.g. Gopal Kumar">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="e.g. gopalkumar@gmail.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="e.g. +91 12359 68390">
+                    </div>
+                </form>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <div class="step-content" id="step2">
+                <div class="form-header">
+                    <h1 class="form-title">Select your plan</h1>
+                    <p class="form-subtitle">You have the option of monthly or yearly billing.</p>
+                </div>
+
+                <div class="billing-toggle">
+                    <span id="monthlyLabel">Monthly</span>
+                    <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()"></div>
+                    <span id="yearlyLabel">Yearly</span>
+                </div>
+
+                <div class="plan-grid">
+                    <div class="plan-card" data-plan="arcade" onclick="selectPlan('arcade')">
+                        <div class="plan-icon">🎮</div>
+                        <div class="plan-name">Arcade</div>
+                        <div class="plan-price" id="arcade-price">$9/mo</div>
+                        <div class="plan-description">Perfect for casual gaming</div>
+                    </div>
+                    
+                    <div class="plan-card" data-plan="advanced" onclick="selectPlan('advanced')">
+                        <div class="plan-icon">🎯</div>
+                        <div class="plan-name">Advanced</div>
+                        <div class="plan-price" id="advanced-price">$12/mo</div>
+                        <div class="plan-description">Great for regular gamers</div>
+                    </div>
+                    
+                    <div class="plan-card" data-plan="pro" onclick="selectPlan('pro')">
+                        <div class="plan-icon">👑</div>
+                        <div class="plan-name">Pro</div>
+                        <div class="plan-price" id="pro-price">$15/mo</div>
+                        <div class="plan-description">Best for hardcore gamers</div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Go Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <div class="step-content" id="step3">
+                <div class="form-header">
+                    <h1 class="form-title">Pick add-ons</h1>
+                    <p class="form-subtitle">Add-ons help enhance your gaming experience.</p>
+                </div>
+
+                <div class="addon-item" data-addon="online" onclick="toggleAddon('online')">
+                    <div class="addon-checkbox"></div>
+                    <div class="addon-info">
+                        <div class="addon-name">Online Service</div>
+                        <div class="addon-description">Access to multiplayer games</div>
+                    </div>
+                    <div class="addon-price" id="online-price">+$1/mo</div>
+                </div>
+
+                <div class="addon-item" data-addon="storage" onclick="toggleAddon('storage')">
+                    <div class="addon-checkbox"></div>
+                    <div class="addon-info">
+                        <div class="addon-name">Larger Storage</div>
+                        <div class="addon-description">Extra 1TB of cloud save</div>
+                    </div>
+                    <div class="addon-price" id="storage-price">+$2/mo</div>
+                </div>
+
+                <div class="addon-item" data-addon="profile" onclick="toggleAddon('profile')">
+                    <div class="addon-checkbox"></div>
+                    <div class="addon-info">
+                        <div class="addon-name">Customizable Profile</div>
+                        <div class="addon-description">Custom theme on your profile</div>
+                    </div>
+                    <div class="addon-price" id="profile-price">+$2/mo</div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Go Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <div class="step-content" id="step4">
+                <div class="form-header">
+                    <h1 class="form-title">Finishing up</h1>
+                    <p class="form-subtitle">Double-check everything looks OK before confirming.</p>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-item">
+                        <div>
+                            <div class="summary-label" id="selected-plan">Arcade (Monthly)</div>
+                            <a href="#" onclick="goToStep(2)" style="color: #667eea; text-decoration: underline;">Change</a>
+                        </div>
+                        <div class="summary-price" id="plan-total">$9/mo</div>
+                    </div>
+                    
+                    <div id="addon-summary">
+                        <!-- Add-ons will be populated here -->
+                    </div>
+                    
+                    <div class="summary-item">
+                        <div class="summary-label" id="total-label">Total (per month)</div>
+                        <div class="summary-price" id="total-price">$9/mo</div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Go Back</button>
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
